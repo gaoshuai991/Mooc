@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="mooc@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="mooc">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="assetmanager"/>
+    <schema id="4" parent="1" name="bedb"/>
+    <schema id="5" parent="1" name="gss"/>
+    <schema id="6" parent="1" name="information_schema"/>
+    <schema id="7" parent="1" name="lkdb"/>
+    <schema id="8" parent="1" name="mysql"/>
+    <schema id="9" parent="1" name="mytest"/>
+    <schema id="10" parent="1" name="performance_schema"/>
+    <schema id="11" parent="1" name="phonebookdb"/>
+    <schema id="12" parent="1" name="shirodb"/>
+    <schema id="13" parent="1" name="sys"/>
+    <table id="14" parent="2" name="admin"/>
+    <table id="15" parent="2" name="count"/>
+    <table id="16" parent="2" name="message"/>
+    <table id="17" parent="2" name="reply"/>
+    <table id="18" parent="2" name="theme"/>
+    <table id="19" parent="2" name="user"/>
+    <column id="20" parent="14" name="aid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="21" parent="14" name="username">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="22" parent="14" name="password">
+      <Position>3</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="23" parent="14" name="authority">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="24" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>aid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="25" parent="15" name="msgid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="15" name="accesscount">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="27" parent="15" name="replycount">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <key id="28" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>msgid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="29" parent="15" name="fk_cmid">
+      <ColNames>msgid</ColNames>
+      <RefSchemaName>mooc</RefSchemaName>
+      <RefTableName>message</RefTableName>
+      <RefColNames>msgid</RefColNames>
+    </foreign-key>
+    <column id="30" parent="16" name="msgid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="31" parent="16" name="userid">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="16" name="msgtopic">
+      <Position>3</Position>
+      <DataType>varchar(200)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="16" name="msgcontents">
+      <Position>4</Position>
+      <DataType>varchar(5000)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="16" name="msgtime">
+      <Position>5</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="16" name="msgip">
+      <Position>6</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="36" parent="16" name="theid">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="37" parent="16" name="state">
+      <Position>8</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="38" parent="16" name="fk_mtid">
+      <ColNames>theid</ColNames>
+    </index>
+    <index id="39" parent="16" name="fk_muid">
+      <ColNames>userid</ColNames>
+    </index>
+    <key id="40" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>msgid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="41" parent="16" name="fk_muid">
+      <ColNames>userid</ColNames>
+      <RefSchemaName>mooc</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>userid</RefColNames>
+    </foreign-key>
+    <foreign-key id="42" parent="16" name="fk_mtid">
+      <ColNames>theid</ColNames>
+      <RefSchemaName>mooc</RefSchemaName>
+      <RefTableName>theme</RefTableName>
+      <RefColNames>theid</RefColNames>
+    </foreign-key>
+    <trigger id="43" parent="16" name="ic">
+      <Turn>after-row</Turn>
+      <Events>I</Events>
+    </trigger>
+    <trigger id="44" parent="16" name="mtcount">
+      <Turn>after-row</Turn>
+      <Events>I</Events>
+    </trigger>
+    <column id="45" parent="17" name="replyid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="46" parent="17" name="msgid">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="47" parent="17" name="userid">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="48" parent="17" name="replycontents">
+      <Position>4</Position>
+      <DataType>varchar(5000)|0</DataType>
+    </column>
+    <column id="49" parent="17" name="replytime">
+      <Position>5</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="50" parent="17" name="replyip">
+      <Position>6</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <index id="51" parent="17" name="fk_rmid">
+      <ColNames>msgid</ColNames>
+    </index>
+    <index id="52" parent="17" name="fk_ruid">
+      <ColNames>userid</ColNames>
+    </index>
+    <key id="53" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>replyid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="54" parent="17" name="fk_rmid">
+      <ColNames>msgid</ColNames>
+      <RefSchemaName>mooc</RefSchemaName>
+      <RefTableName>message</RefTableName>
+      <RefColNames>msgid</RefColNames>
+    </foreign-key>
+    <foreign-key id="55" parent="17" name="fk_ruid">
+      <ColNames>userid</ColNames>
+      <RefSchemaName>mooc</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>userid</RefColNames>
+    </foreign-key>
+    <trigger id="56" parent="17" name="insert">
+      <Turn>after-row</Turn>
+      <Events>I</Events>
+    </trigger>
+    <column id="57" parent="18" name="theid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="58" parent="18" name="thename">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="18" name="count">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <key id="60" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>theid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="61" parent="19" name="userid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="62" parent="19" name="username">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="63" parent="19" name="password">
+      <Position>3</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="64" parent="19" name="realname">
+      <Position>4</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="65" parent="19" name="sex">
+      <Position>5</Position>
+      <DataType>char(2)|0</DataType>
+    </column>
+    <column id="66" parent="19" name="hobbys">
+      <Position>6</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="67" parent="19" name="birthday">
+      <Position>7</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="68" parent="19" name="city">
+      <Position>8</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="69" parent="19" name="email">
+      <Position>9</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="70" parent="19" name="qq">
+      <Position>10</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="71" parent="19" name="createtime">
+      <Position>11</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="72" parent="19" name="state">
+      <Position>12</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="73" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>userid</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

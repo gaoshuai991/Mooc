@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="root" extends="struts-default">
+        <interceptors>
+            <interceptor name="encoding" class="cn.gss.util.interceptor.EncodingInterceptor"/>
+            <interceptor name="validate" class="cn.gss.util.interceptor.ValidateInterceptor"/>
+            <interceptor name="user" class="cn.gss.mooc.interceptor.UserInterceptor"/>
+            <interceptor name="admin" class="cn.gss.mooc.interceptor.AdminInterceptor"/>
+
+            <interceptor-stack name="userStack">
+                <interceptor-ref name="encoding"/>
+                <interceptor-ref name="user"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+            <interceptor-stack name="adminStack">
+                <interceptor-ref name="encoding"/>
+                <interceptor-ref name="admin"/>
+                <interceptor-ref name="validate"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+            <interceptor-stack name="encodingStack">
+                <interceptor-ref name="encoding"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+            <interceptor-stack name="validateStack">
+                <interceptor-ref name="encoding"/>
+                <interceptor-ref name="validate"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <global-results>
+            <result name="admin.login.page">/admin_login.jsp</result>
+            <result name="user.login.page">/login.jsp</result>
+            <result name="forward.page">/forward.jsp</result>
+            <result name="errors.page">/errors.jsp</result>
+        </global-results>
+    </package>
+</struts>
